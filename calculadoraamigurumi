@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Preço - Amigurumi</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fcefe3;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: auto;
+        }
+        .banner {
+            width: 100%;
+            border-radius: 10px 10px 0 0;
+        }
+        h2 {
+            color: #d18b67;
+            font-weight: 600;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+            color: #795548;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 2px solid #d8a383;
+            border-radius: 5px;
+            font-size: 16px;
+            background: #fffaf5;
+        }
+        button {
+            background-color: #d18b67;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #b87256;
+        }
+        .resultado {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #5d4037;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img src="https://i.imgur.com/BD6pNHj.png" class="banner">
+        <h2>Calculadora de Preço - Amigurumi</h2>
+        
+        <label for="materiais">Custo dos Materiais (R$):</label>
+        <input type="number" id="materiais" step="0.01" placeholder="Ex: 20.00">
+
+        <label for="tempo">Tempo Gasto (horas):</label>
+        <input type="number" id="tempo" step="0.5" placeholder="Ex: 5">
+
+        <label for="valorHora">Valor da sua Hora de Trabalho (R$):</label>
+        <input type="number" id="valorHora" step="0.01" placeholder="Ex: 10.00">
+
+        <label for="lucro">Margem de Lucro (%):</label>
+        <input type="number" id="lucro" step="1" placeholder="Ex: 30">
+
+        <button onclick="calcularPreco()">Calcular Preço</button>
+
+        <div class="resultado" id="resultado"></div>
+    </div>
+
+    <script>
+        function calcularPreco() {
+            let materiais = parseFloat(document.getElementById("materiais").value) || 0;
+            let tempo = parseFloat(document.getElementById("tempo").value) || 0;
+            let valorHora = parseFloat(document.getElementById("valorHora").value) || 0;
+            let lucro = parseFloat(document.getElementById("lucro").value) || 0;
+
+            if (materiais <= 0 || tempo <= 0 || valorHora <= 0) {
+                document.getElementById("resultado").innerHTML = "Preencha todos os campos corretamente.";
+                return;
+            }
+
+            let custoTotal = materiais + (tempo * valorHora);
+            let precoFinal = custoTotal + (custoTotal * (lucro / 100));
+
+            document.getElementById("resultado").innerHTML = 
+                `O preço ideal para sua peça é <strong>R$ ${precoFinal.toFixed(2)}</strong>.`;
+        }
+    </script>
+
+</body>
+</html>
